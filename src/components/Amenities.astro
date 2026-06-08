@@ -1,0 +1,23 @@
+---
+type Props = {
+  kicker: string;
+  amenitiesText: {
+    title: string;
+    text: string;
+    items: string[];
+  };
+};
+
+const { kicker, amenitiesText } = Astro.props;
+---
+
+<section class="amenities" aria-labelledby="amenities-title">
+  <div>
+    <p class="section__kicker">{kicker}</p>
+    <h2 id="amenities-title">{amenitiesText.title}</h2>
+    <p>{amenitiesText.text}</p>
+  </div>
+  <ul class="amenities__grid">
+    {amenitiesText.items.map((item) => <li>{item}</li>)}
+  </ul>
+</section>

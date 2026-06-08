@@ -1,0 +1,15 @@
+name = "acasadomuineiro"
+account_id = "d4b36eb5864e8c951be8757325a4f706"
+main = "src/worker.js"
+compatibility_date = "2026-06-07"
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "a-casa-do-muineiro"
+database_id = "edfb37a6-9b53-42ca-93b2-77cd32da506a"
+

@@ -1,0 +1,23 @@
+---
+type Props = {
+  kicker: string;
+  intro: {
+    title: string;
+    p1: string;
+    p2: string;
+  };
+};
+
+const { kicker, intro } = Astro.props;
+---
+
+<section class="section intro" id="casa" aria-labelledby="intro-title">
+  <div class="section__kicker">{kicker}</div>
+  <div class="intro__grid">
+    <h2 id="intro-title">{intro.title}</h2>
+    <div class="intro__copy">
+      <p>{intro.p1}</p>
+      <p>{intro.p2}</p>
+    </div>
+  </div>
+</section>

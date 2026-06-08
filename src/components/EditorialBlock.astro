@@ -1,0 +1,30 @@
+---
+type Props = {
+  kicker: string;
+  editorial: {
+    title: string;
+    text: string;
+  };
+};
+
+const { kicker, editorial } = Astro.props;
+---
+
+<section class="section editorial" aria-labelledby="editorial-title">
+  <div class="editorial__images" aria-label="Imágenes de interiores y exteriores">
+    <figure class="editorial__image editorial__image--large">
+      <img src="/images/optimized/salon-07.jpg" alt="Salón familiar de A Casa do Muiñeiro" loading="lazy" decoding="async" />
+    </figure>
+    <figure class="editorial__image">
+      <img src="/images/optimized/lareira-01.jpg" alt="Lareira tradicional de piedra en el interior de la casa" loading="lazy" decoding="async" />
+    </figure>
+    <figure class="editorial__image">
+      <img src="/images/optimized/jardin-04.jpg" alt="Parra y jardín de la finca privada" loading="lazy" decoding="async" />
+    </figure>
+  </div>
+  <div class="editorial__copy">
+    <p class="section__kicker">{kicker}</p>
+    <h2 id="editorial-title">{editorial.title}</h2>
+    <p>{editorial.text}</p>
+  </div>
+</section>

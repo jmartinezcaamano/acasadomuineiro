@@ -1,0 +1,245 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const title = "Admin reservas · A Casa do Muiñeiro";
+const description = "Panel interno de gestión de reservas de A Casa do Muiñeiro.";
+---
+
+<BaseLayout title={title} description={description} lang="es">
+  <main class="admin-page">
+    <section class="admin-shell" data-admin>
+      <header class="admin-header">
+        <div>
+          <p class="section__kicker">Panel interno</p>
+          <h1>Reservas</h1>
+          <p>Gestión manual de reservas y bloqueos. El cliente solo verá fechas ocupadas.</p>
+        </div>
+        <a class="button button--secondary" href="/">Volver a la web</a>
+      </header>
+
+      <section class="admin-token" data-token-panel>
+        <label>
+          Token de administración
+          <input type="password" data-token autocomplete="current-password" />
+        </label>
+        <button class="button button--primary" type="button" data-save-token>Entrar</button>
+        <p>Configura el mismo valor en Cloudflare como variable secreta `ADMIN_TOKEN`.</p>
+      </section>
+
+      <section class="admin-grid" data-admin-content hidden>
+        <form class="admin-form" data-reservation-form>
+          <input type="hidden" name="id" />
+          <h2>Nueva reserva o bloqueo</h2>
+          <label>
+            Estado
+            <select name="status">
+              <option value="confirmed">Confirmada</option>
+              <option value="blocked">Bloqueo</option>
+              <option value="pending">Pendiente</option>
+              <option value="cancelled">Cancelada</option>
+            </select>
+          </label>
+          <label>
+            Entrada
+            <input name="startDate" type="date" required />
+          </label>
+          <label>
+            Salida
+            <input name="endDate" type="date" required />
+          </label>
+          <label>
+            Huéspedes
+            <input name="guests" type="number" min="0" max="30" value="1" />
+          </label>
+          <label>
+            Nombre
+            <input name="guestName" />
+          </label>
+          <label>
+            Contacto
+            <input name="guestContact" />
+          </label>
+          <label>
+            Canal
+            <input name="source" value="direct" />
+          </label>
+          <label>
+            Precio total
+            <input name="totalPrice" type="number" min="0" step="1" />
+          </label>
+          <label class="admin-form__wide">
+            Notas internas
+            <textarea name="notes" rows="4"></textarea>
+          </label>
+          <div class="admin-form__actions">
+            <button class="button button--primary" type="submit">Guardar</button>
+            <button class="button button--secondary" type="button" data-reset-form>Limpiar</button>
+          </div>
+        </form>
+
+        <section class="admin-list">
+          <div class="admin-list__header">
+            <h2>Reservas operativas</h2>
+            <button class="button button--secondary" type="button" data-refresh>Actualizar</button>
+          </div>
+          <p class="admin-status" data-admin-status></p>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Fechas</th>
+                  <th>Estado</th>
+                  <th>Cliente</th>
+                  <th>Personas</th>
+                  <th>Precio</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody data-reservations></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const tokenPanel = document.querySelector("[data-token-panel]");
+    const adminContent = document.querySelector("[data-admin-content]");
+    const tokenInput = document.querySelector("[data-token]");
+    const saveTokenButton = document.querySelector("[data-save-token]");
+    const refreshButton = document.querySelector("[data-refresh]");
+    const form = document.querySelector("[data-reservation-form]");
+    const resetButton = document.querySelector("[data-reset-form]");
+    const statusNode = document.querySelector("[data-admin-status]");
+    const rowsNode = document.querySelector("[data-reservations]");
+    const tokenKey = "muineiro_admin_token";
+
+    const setStatus = (message) => {
+      if (statusNode) statusNode.textContent = message;
+    };
+
+    const getToken = () => localStorage.getItem(tokenKey) || "";
+
+    const headers = () => ({
+      "content-type": "application/json",
+      authorization: `Bearer ${getToken()}`,
+    });
+
+    const readForm = () => {
+      const data = new FormData(form);
+      return {
+        id: data.get("id") ? Number(data.get("id")) : undefined,
+        status: data.get("status"),
+        startDate: data.get("startDate"),
+        endDate: data.get("endDate"),
+        guests: Number(data.get("guests") || 1),
+        guestName: data.get("guestName"),
+        guestContact: data.get("guestContact"),
+        source: data.get("source"),
+        totalPrice: data.get("totalPrice"),
+        notes: data.get("notes"),
+      };
+    };
+
+    const resetForm = () => {
+      form.reset();
+      form.querySelector('[name="id"]').value = "";
+      form.querySelector('[name="source"]').value = "direct";
+      form.querySelector('[name="guests"]').value = "1";
+      form.querySelector("h2").textContent = "Nueva reserva o bloqueo";
+    };
+
+    const editReservation = (reservation) => {
+      form.querySelector('[name="id"]').value = reservation.id;
+      form.querySelector('[name="status"]').value = reservation.status;
+      form.querySelector('[name="startDate"]').value = reservation.start_date;
+      form.querySelector('[name="endDate"]').value = reservation.end_date;
+      form.querySelector('[name="guests"]').value = reservation.guests || 1;
+      form.querySelector('[name="guestName"]').value = reservation.guest_name || "";
+      form.querySelector('[name="guestContact"]').value = reservation.guest_contact || "";
+      form.querySelector('[name="source"]').value = reservation.source || "direct";
+      form.querySelector('[name="totalPrice"]').value = reservation.total_price || "";
+      form.querySelector('[name="notes"]').value = reservation.notes || "";
+      form.querySelector("h2").textContent = `Editar reserva #${reservation.id}`;
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    const renderReservations = (reservations) => {
+      rowsNode.innerHTML = "";
+      if (!reservations.length) {
+        rowsNode.innerHTML = '<tr><td colspan="6">No hay reservas operativas.</td></tr>';
+        return;
+      }
+      reservations.forEach((reservation) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td><strong>${reservation.start_date}</strong><br>${reservation.end_date}</td>
+          <td><span class="admin-pill">${reservation.status}</span></td>
+          <td>${reservation.guest_name || "-"}<br><small>${reservation.guest_contact || reservation.source || ""}</small></td>
+          <td>${reservation.guests || 0}</td>
+          <td>${reservation.total_price ? `${reservation.total_price} €` : "-"}</td>
+          <td><button type="button" class="admin-edit">Editar</button></td>
+        `;
+        row.querySelector(".admin-edit").addEventListener("click", () => editReservation(reservation));
+        rowsNode.append(row);
+      });
+    };
+
+    const loadReservations = async () => {
+      setStatus("Cargando reservas...");
+      try {
+        const response = await fetch("/api/admin/reservations", { headers: headers() });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "No se pudieron cargar las reservas.");
+        renderReservations(data.reservations || []);
+        setStatus("Reservas actualizadas.");
+      } catch (error) {
+        setStatus(error.message);
+      }
+    };
+
+    const enter = () => {
+      const token = tokenInput.value.trim();
+      if (token) localStorage.setItem(tokenKey, token);
+      if (!getToken()) return;
+      tokenPanel.hidden = true;
+      adminContent.hidden = false;
+      loadReservations();
+    };
+
+    saveTokenButton.addEventListener("click", enter);
+    tokenInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") enter();
+    });
+    refreshButton.addEventListener("click", loadReservations);
+    resetButton.addEventListener("click", resetForm);
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const payload = readForm();
+      const method = payload.id ? "PATCH" : "POST";
+      setStatus("Guardando...");
+      try {
+        const response = await fetch("/api/admin/reservations", {
+          method,
+          headers: headers(),
+          body: JSON.stringify(payload),
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "No se pudo guardar.");
+        resetForm();
+        await loadReservations();
+        setStatus("Reserva guardada.");
+      } catch (error) {
+        setStatus(error.message);
+      }
+    });
+
+    const existingToken = getToken();
+    if (existingToken) {
+      tokenInput.value = existingToken;
+      enter();
+    }
+  </script>
+</BaseLayout>

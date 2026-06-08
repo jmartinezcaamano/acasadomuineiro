@@ -1,0 +1,31 @@
+---
+import { contactLinks } from "@data/links";
+
+type Props = {
+  hero: {
+    eyebrow: string;
+    title: string;
+    text: string;
+    primary: string;
+    secondary: string;
+    maps: string;
+  };
+};
+
+const { hero } = Astro.props;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <img class="hero__image" src="/images/hero/hero.jpg" alt="A Casa do Muiñeiro rodeada de finca y naturaleza en la Costa da Morte" loading="eager" decoding="async" />
+  <div class="hero__shade" aria-hidden="true"></div>
+  <div class="hero__content">
+    <p class="eyebrow">{hero.eyebrow}</p>
+    <h1 id="hero-title">{hero.title}</h1>
+    <p>{hero.text}</p>
+    <div class="hero__actions">
+      <a class="button button--primary" href="#reservas">{hero.primary}</a>
+      <a class="button button--ghost" href="#casa">{hero.secondary}</a>
+      <a class="button button--ghost" href={contactLinks.maps} target="_blank" rel="noreferrer">{hero.maps}</a>
+    </div>
+  </div>
+</section>

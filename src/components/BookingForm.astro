@@ -1,0 +1,88 @@
+---
+import { contactLinks } from "@data/links";
+
+type Props = {
+  kicker: string;
+  booking: {
+    title: string;
+    text: string;
+    name: string;
+    dates: string;
+    guests: string;
+    contact: string;
+    message: string;
+    whatsapp: string;
+    email: string;
+    call: string;
+    quickEmail: string;
+    instagram: string;
+  };
+};
+
+const { kicker, booking } = Astro.props;
+---
+
+<section class="booking" id="reservas" aria-labelledby="booking-title">
+  <div class="booking__copy">
+    <p class="section__kicker">{kicker}</p>
+    <h2 id="booking-title">{booking.title}</h2>
+    <p>{booking.text}</p>
+    <div class="booking__quick-links">
+      <a href={`tel:${contactLinks.phone}`}>{booking.call}</a>
+      <a href={`mailto:${contactLinks.email}`}>{booking.quickEmail}</a>
+      <a href={contactLinks.instagram} target="_blank" rel="noreferrer">{booking.instagram}</a>
+    </div>
+  </div>
+  <form class="booking-form" data-booking-form>
+    <label>
+      {booking.name}
+      <input name="name" autocomplete="name" />
+    </label>
+    <label>
+      {booking.dates}
+      <input name="dates" />
+    </label>
+    <label>
+      {booking.guests}
+      <input name="guests" inputmode="numeric" />
+    </label>
+    <label>
+      {booking.contact}
+      <input name="contact" autocomplete="email" />
+    </label>
+    <label class="booking-form__wide">
+      {booking.message}
+      <textarea name="message" rows="4"></textarea>
+    </label>
+    <div class="booking-form__actions">
+      <button class="button button--primary" type="button" data-whatsapp>{booking.whatsapp}</button>
+      <button class="button button--secondary" type="button" data-email>{booking.email}</button>
+    </div>
+  </form>
+
+  <script>
+    const form = document.querySelector("[data-booking-form]");
+    const phone = "34606818656";
+    const email = "acasadomuineiro@gmail.com";
+    const subject = "Consulta de reserva - A Casa do Muiñeiro";
+
+    const value = (name) => form?.querySelector(`[name="${name}"]`)?.value?.trim() || "";
+    const buildBody = () => [
+      "Hola, quiero consultar disponibilidad en A Casa do Muiñeiro.",
+      "",
+      `Nombre: ${value("name")}`,
+      `Fechas: ${value("dates")}`,
+      `Personas: ${value("guests")}`,
+      `Teléfono/email: ${value("contact")}`,
+      `Mensaje: ${value("message")}`,
+    ].join("\n");
+
+    form?.querySelector("[data-whatsapp]")?.addEventListener("click", () => {
+      window.location.href = `https://wa.me/${phone}?text=${encodeURIComponent(buildBody())}`;
+    });
+
+    form?.querySelector("[data-email]")?.addEventListener("click", () => {
+      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildBody())}`;
+    });
+  </script>
+</section>

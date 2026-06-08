@@ -1,0 +1,22 @@
+---
+type Props = {
+  river: {
+    title: string;
+    text: string;
+  };
+};
+
+const { river } = Astro.props;
+---
+
+<section class="river-section" id="rio" aria-labelledby="river-title">
+  <div class="river-section__copy">
+    <p class="section__kicker">Río Grande</p>
+    <h2 id="river-title">{river.title}</h2>
+    <p>{river.text}</p>
+  </div>
+  <div class="river-section__gallery">
+    <img src="/images/optimized/rio-03.jpg" alt="Río Grande integrado en la finca de A Casa do Muiñeiro" loading="lazy" decoding="async" />
+    <img src="/images/optimized/rio-01.jpg" alt="Orilla del Río Grande accesible desde la finca privada" loading="lazy" decoding="async" />
+  </div>
+</section>
