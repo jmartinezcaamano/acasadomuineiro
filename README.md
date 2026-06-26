@@ -89,7 +89,7 @@ Asunto del email: `Consulta de reserva - A Casa do Muiñeiro`.
 
 El proyecto incluye un backend mínimo para Cloudflare Workers + Static Assets + D1:
 
-- `src/worker.js`: Worker que sirve `/api/*` y delega la web estática a `dist`.
+- `src/worker.js`: Worker que sirve `/api/*` (disponibilidad, consultas y panel de administración) y delega la web estática a `dist`.
 - `src/pages/admin.astro`: panel interno de gestión.
 - `migrations/0001_reservations.sql`: esquema D1.
 - `wrangler.toml`: configuración base de Cloudflare.
@@ -100,11 +100,7 @@ El proyecto incluye un backend mínimo para Cloudflare Workers + Static Assets +
 npx wrangler d1 create a-casa-do-muineiro
 ```
 
-Copia el `database_id` que devuelva Cloudflare en `wrangler.toml`, sustituyendo:
-
-```toml
-database_id = "REPLACE_WITH_CLOUDFLARE_D1_DATABASE_ID"
-```
+El `database_id` ya está configurado en `wrangler.toml`. Si creas una base nueva, copia el `database_id` que devuelva Cloudflare y actualiza `wrangler.toml`.
 
 ### Aplicar migraciones
 
