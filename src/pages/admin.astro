@@ -19,11 +19,11 @@ const description = "Panel interno de gestión de reservas de A Casa do Muiñeir
 
       <section class="admin-token" data-token-panel>
         <label>
-          Token de administración
-          <input type="password" data-token autocomplete="current-password" />
+          Clave privada de administración
+          <input type="password" data-token autocomplete="off" inputmode="text" />
         </label>
         <button class="button button--primary" type="button" data-save-token>Entrar</button>
-        <p>Configura el mismo valor en Cloudflare como variable secreta `ADMIN_TOKEN`.</p>
+        <p>Entra desde <strong>/admin</strong>. No compartas la clave en enlaces ni la añadas a la URL.</p>
       </section>
 
       <section class="admin-grid" data-admin-content hidden>
@@ -80,7 +80,10 @@ const description = "Panel interno de gestión de reservas de A Casa do Muiñeir
         <section class="admin-list">
           <div class="admin-list__header">
             <h2>Reservas operativas</h2>
-            <button class="button button--secondary" type="button" data-refresh>Actualizar</button>
+            <div class="admin-list__actions">
+              <button class="button button--secondary" type="button" data-refresh>Actualizar</button>
+              <button class="button button--ghost" type="button" data-logout>Cerrar sesión</button>
+            </div>
           </div>
           <p class="admin-status" data-admin-status></p>
           <div class="admin-table-wrap">
@@ -109,6 +112,7 @@ const description = "Panel interno de gestión de reservas de A Casa do Muiñeir
     const tokenInput = document.querySelector("[data-token]");
     const saveTokenButton = document.querySelector("[data-save-token]");
     const refreshButton = document.querySelector("[data-refresh]");
+    const logoutButton = document.querySelector("[data-logout]");
     const form = document.querySelector("[data-reservation-form]");
     const resetButton = document.querySelector("[data-reset-form]");
     const statusNode = document.querySelector("[data-admin-status]");
@@ -119,7 +123,7 @@ const description = "Panel interno de gestión de reservas de A Casa do Muiñeir
       if (statusNode) statusNode.textContent = message;
     };
 
-    const getToken = () => localStorage.getItem(tokenKey) || "";
+    const getToken = () => sessionStorage.getItem(tokenKey) || "";
 
     const headers = () => ({
       "content-type": "application/json",
@@ -201,11 +205,21 @@ const description = "Panel interno de gestión de reservas de A Casa do Muiñeir
 
     const enter = () => {
       const token = tokenInput.value.trim();
-      if (token) localStorage.setItem(tokenKey, token);
+      if (token) sessionStorage.setItem(tokenKey, token);
       if (!getToken()) return;
       tokenPanel.hidden = true;
       adminContent.hidden = false;
       loadReservations();
+    };
+
+    const logout = () => {
+      sessionStorage.removeItem(tokenKey);
+      tokenInput.value = "";
+      adminContent.hidden = true;
+      tokenPanel.hidden = false;
+      setStatus("");
+      rowsNode.innerHTML = "";
+      tokenInput.focus();
     };
 
     saveTokenButton.addEventListener("click", enter);
@@ -213,6 +227,7 @@ const description = "Panel interno de gestión de reservas de A Casa do Muiñeir
       if (event.key === "Enter") enter();
     });
     refreshButton.addEventListener("click", loadReservations);
+    logoutButton.addEventListener("click", logout);
     resetButton.addEventListener("click", resetForm);
 
     form.addEventListener("submit", async (event) => {
