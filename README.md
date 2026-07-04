@@ -128,7 +128,7 @@ El panel `/admin` no permite consultar ni guardar reservas sin `ADMIN_TOKEN`.
 npx wrangler secret put ADMIN_TOKEN
 ```
 
-Entra siempre desde `/admin`, escribe la clave en el formulario y evita compartir enlaces con la clave dentro. El panel envía el token en la cabecera privada `Authorization` y lo guarda solo en la sesión del navegador; al cerrar la pestaña o pulsar "Cerrar sesión", se borra.
+Usa ese token en `/admin` para entrar. El token se guarda solo en el navegador del administrador.
 
 Si Cloudflare todavía dice que no puedes añadir variables porque el Worker solo tiene activos estáticos, despliega primero la nueva versión con script:
 
