@@ -1,8 +1,0 @@
-node_modules/
-.astro/
-.npm-cache/
-.local-home/
-.wrangler/
-.cache/
-dist/
-.DS_Store

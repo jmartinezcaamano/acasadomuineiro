@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A Casa do Muiñeiro">
-  <rect width="64" height="64" rx="8" fill="#F4EFE7"/>
-  <path d="M13 36 32 18l19 18" fill="none" stroke="#2F3F37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M20 35v16h24V35" fill="none" stroke="#1F2322" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M25 51c4-9 10-9 14 0" fill="none" stroke="#7A846E" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M15 12c8 8 26 8 34 0" fill="none" stroke="#A96546" stroke-width="2" stroke-linecap="round"/>
-</svg>
