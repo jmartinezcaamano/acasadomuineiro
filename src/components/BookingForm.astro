@@ -7,7 +7,8 @@ type Props = {
     title: string;
     text: string;
     rates2026Title: string;
-    rates2026Text: string;
+    rates2026Intro: string;
+    rates2026Items: string[];
     name: string;
     dates: string;
     guests: string;
@@ -31,7 +32,10 @@ const { kicker, booking } = Astro.props;
     <p>{booking.text}</p>
     <div class="booking__rates">
       <p class="booking__rates-title">{booking.rates2026Title}</p>
-      <p>{booking.rates2026Text}</p>
+      <p>{booking.rates2026Intro}</p>
+      <ul class="booking__rates-list">
+        {booking.rates2026Items.map((item) => <li>{item}</li>)}
+      </ul>
     </div>
     <div class="booking__quick-links">
       <a href={`tel:${contactLinks.phone}`}>{booking.call}</a>

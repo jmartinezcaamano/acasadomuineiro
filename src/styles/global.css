@@ -200,6 +200,27 @@ h3 {
   margin-top: 0;
 }
 
+.booking__rates-list {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.booking__rates-list li {
+  padding: 4px 0;
+  font-size: clamp(1rem, 1.3vw, 1.16rem);
+}
+
+.booking__rates-list li::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 10px;
+  background: var(--color-moss);
+  vertical-align: 0.08em;
+}
+
 .hero__actions,
 .booking-form__actions,
 .booking__quick-links {
