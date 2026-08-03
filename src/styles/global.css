@@ -183,6 +183,23 @@ h3 {
   color: rgba(255, 255, 255, 0.91);
 }
 
+.booking__rates {
+  margin-top: 22px;
+}
+
+.booking__rates-title {
+  margin: 18px 0 4px;
+  color: var(--color-moss);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.booking__rates-title:first-child {
+  margin-top: 0;
+}
+
 .hero__actions,
 .booking-form__actions,
 .booking__quick-links {
