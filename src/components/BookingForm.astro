@@ -8,8 +8,6 @@ type Props = {
     text: string;
     rates2026Title: string;
     rates2026Text: string;
-    rates2027Title: string;
-    rates2027Text: string;
     name: string;
     dates: string;
     guests: string;
@@ -34,8 +32,6 @@ const { kicker, booking } = Astro.props;
     <div class="booking__rates">
       <p class="booking__rates-title">{booking.rates2026Title}</p>
       <p>{booking.rates2026Text}</p>
-      <p class="booking__rates-title">{booking.rates2027Title}</p>
-      <p>{booking.rates2027Text}</p>
     </div>
     <div class="booking__quick-links">
       <a href={`tel:${contactLinks.phone}`}>{booking.call}</a>
