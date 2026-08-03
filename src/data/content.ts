@@ -100,7 +100,7 @@ export const content = {
       title: "Consúltanos las fechas disponibles.",
       text: "Capacidad máxima: 8 personas, con posibilidad de una plaza adicional bajo consulta.",
       rates2026Title: "Tarifas 2026",
-      rates2026Intro: "Precio orientativo:",
+      rates2026Intro: "",
       rates2026Items: [
         "Temporada alta (Julio y Agosto): 260 €/noche. Estancia mínima 7 noches.",
         "Resto del año (excepto Semana Santa): 230 €/noche. Estancia mínima 2 noches.",
@@ -210,7 +210,7 @@ export const content = {
       title: "Consúltanos as datas dispoñibles.",
       text: "Capacidade máxima: 8 persoas, con posibilidade dunha praza adicional baixo consulta.",
       rates2026Title: "Tarifas 2026",
-      rates2026Intro: "Prezo orientativo:",
+      rates2026Intro: "",
       rates2026Items: [
         "Tempada alta (xullo e agosto): 260 €/noite. Estancia mínima de 7 noites.",
         "Resto do ano (excepto Semana Santa): 230 €/noite. Estancia mínima de 2 noites.",
@@ -318,7 +318,7 @@ export const content = {
       title: "Ask us for available dates.",
       text: "Maximum capacity: 8 people, with one additional place possible on request.",
       rates2026Title: "2026 rates",
-      rates2026Intro: "Guide price:",
+      rates2026Intro: "",
       rates2026Items: [
         "High season (July and August): €260/night. Minimum stay of 7 nights.",
         "Rest of the year (except Easter): €230/night. Minimum stay of 2 nights.",
@@ -426,7 +426,7 @@ export const content = {
       title: "Consultez-nous pour les dates disponibles.",
       text: "Capacité maximale : 8 personnes, avec une place supplémentaire possible sur demande.",
       rates2026Title: "Tarifs 2026",
-      rates2026Intro: "Prix indicatif :",
+      rates2026Intro: "",
       rates2026Items: [
         "Haute saison (juillet et août) : 260 €/nuit. Séjour minimum de 7 nuits.",
         "Reste de l'année (sauf Pâques) : 230 €/nuit. Séjour minimum de 2 nuits.",
