@@ -98,10 +98,13 @@ export const content = {
     },
     booking: {
       title: "Consúltanos las fechas disponibles.",
-      text: "Estancia mínima en julio y agosto: 7 noches. Resto del año: 2 noches. Capacidad máxima: 8 personas, con posibilidad de una plaza adicional bajo consulta.",
+      text: "Estancia mínima en julio y agosto: 7 noches. Resto del año, excepto Semana Santa: 2 noches. Capacidad máxima: 8 personas, con posibilidad de una plaza adicional bajo consulta.",
       rates2026Title: "Tarifas 2026",
       rates2026Intro: "Precio orientativo:",
-      rates2026Items: ["260 €/noche julio y agosto.", "230 €/noche resto del año."],
+      rates2026Items: [
+        "Temporada alta (julio y agosto): 260 €/noche. Estancia mínima de 7 noches.",
+        "Resto del año (excepto Semana Santa): 230 €/noche. Estancia mínima de 2 noches.",
+      ],
       name: "Nombre",
       dates: "Fechas",
       guests: "Personas",
@@ -205,10 +208,13 @@ export const content = {
     },
     booking: {
       title: "Consúltanos as datas dispoñibles.",
-      text: "Estancia mínima en xullo e agosto: 7 noites. Resto do ano: 2 noites. Capacidade máxima: 8 persoas, con posibilidade dunha praza adicional baixo consulta.",
+      text: "Estancia mínima en xullo e agosto: 7 noites. Resto do ano, excepto Semana Santa: 2 noites. Capacidade máxima: 8 persoas, con posibilidade dunha praza adicional baixo consulta.",
       rates2026Title: "Tarifas 2026",
       rates2026Intro: "Prezo orientativo:",
-      rates2026Items: ["260 €/noite xullo e agosto.", "230 €/noite resto do ano."],
+      rates2026Items: [
+        "Tempada alta (xullo e agosto): 260 €/noite. Estancia mínima de 7 noites.",
+        "Resto do ano (excepto Semana Santa): 230 €/noite. Estancia mínima de 2 noites.",
+      ],
       name: "Nome",
       dates: "Datas",
       guests: "Persoas",
@@ -310,10 +316,13 @@ export const content = {
     },
     booking: {
       title: "Ask us for available dates.",
-      text: "Minimum stay in July and August: 7 nights. Rest of the year: 2 nights. Maximum capacity: 8 people, with one additional place possible on request.",
+      text: "Minimum stay in July and August: 7 nights. Rest of the year, except Easter: 2 nights. Maximum capacity: 8 people, with one additional place possible on request.",
       rates2026Title: "2026 rates",
       rates2026Intro: "Guide price:",
-      rates2026Items: ["€260/night July and August.", "€230/night rest of the year."],
+      rates2026Items: [
+        "High season (July and August): €260/night. Minimum stay of 7 nights.",
+        "Rest of the year (except Easter): €230/night. Minimum stay of 2 nights.",
+      ],
       name: "Name",
       dates: "Dates",
       guests: "Guests",
@@ -415,10 +424,13 @@ export const content = {
     },
     booking: {
       title: "Consultez-nous pour les dates disponibles.",
-      text: "Séjour minimum en juillet et août: 7 nuits. Reste de l'année: 2 nuits. Capacité maximale: 8 personnes, avec une place supplémentaire possible sur demande.",
+      text: "Séjour minimum en juillet et août : 7 nuits. Reste de l'année, sauf Pâques : 2 nuits. Capacité maximale : 8 personnes, avec une place supplémentaire possible sur demande.",
       rates2026Title: "Tarifs 2026",
       rates2026Intro: "Prix indicatif :",
-      rates2026Items: ["260 €/nuit juillet et août.", "230 €/nuit reste de l'année."],
+      rates2026Items: [
+        "Haute saison (juillet et août) : 260 €/nuit. Séjour minimum de 7 nuits.",
+        "Reste de l'année (sauf Pâques) : 230 €/nuit. Séjour minimum de 2 nuits.",
+      ],
       name: "Nom",
       dates: "Dates",
       guests: "Personnes",
