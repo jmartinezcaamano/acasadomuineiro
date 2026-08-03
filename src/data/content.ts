@@ -102,8 +102,8 @@ export const content = {
       rates2026Title: "Tarifas 2026",
       rates2026Intro: "Precio orientativo:",
       rates2026Items: [
-        "Temporada alta (julio y agosto): 260 €/noche. Estancia mínima de 7 noches.",
-        "Resto del año (excepto Semana Santa): 230 €/noche. Estancia mínima de 2 noches.",
+        "Temporada alta (Julio y Agosto): 260 €/noche. Estancia mínima 7 noches.",
+        "Resto del año (excepto Semana Santa): 230 €/noche. Estancia mínima 2 noches.",
       ],
       name: "Nombre",
       dates: "Fechas",
