@@ -98,7 +98,7 @@ export const content = {
     },
     booking: {
       title: "Consúltanos las fechas disponibles.",
-      text: "Estancia mínima en julio y agosto: 7 noches. Resto del año, excepto Semana Santa: 2 noches. Capacidad máxima: 8 personas, con posibilidad de una plaza adicional bajo consulta.",
+      text: "Capacidad máxima: 8 personas, con posibilidad de una plaza adicional bajo consulta.",
       rates2026Title: "Tarifas 2026",
       rates2026Intro: "Precio orientativo:",
       rates2026Items: [
@@ -208,7 +208,7 @@ export const content = {
     },
     booking: {
       title: "Consúltanos as datas dispoñibles.",
-      text: "Estancia mínima en xullo e agosto: 7 noites. Resto do ano, excepto Semana Santa: 2 noites. Capacidade máxima: 8 persoas, con posibilidade dunha praza adicional baixo consulta.",
+      text: "Capacidade máxima: 8 persoas, con posibilidade dunha praza adicional baixo consulta.",
       rates2026Title: "Tarifas 2026",
       rates2026Intro: "Prezo orientativo:",
       rates2026Items: [
@@ -316,7 +316,7 @@ export const content = {
     },
     booking: {
       title: "Ask us for available dates.",
-      text: "Minimum stay in July and August: 7 nights. Rest of the year, except Easter: 2 nights. Maximum capacity: 8 people, with one additional place possible on request.",
+      text: "Maximum capacity: 8 people, with one additional place possible on request.",
       rates2026Title: "2026 rates",
       rates2026Intro: "Guide price:",
       rates2026Items: [
@@ -424,7 +424,7 @@ export const content = {
     },
     booking: {
       title: "Consultez-nous pour les dates disponibles.",
-      text: "Séjour minimum en juillet et août : 7 nuits. Reste de l'année, sauf Pâques : 2 nuits. Capacité maximale : 8 personnes, avec une place supplémentaire possible sur demande.",
+      text: "Capacité maximale : 8 personnes, avec une place supplémentaire possible sur demande.",
       rates2026Title: "Tarifs 2026",
       rates2026Intro: "Prix indicatif :",
       rates2026Items: [
